@@ -1,0 +1,78 @@
+<?php //require_once '../controller/Search.controller.php';
+
+
+
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="../css/tables.css" rel="stylesheet" />
+	<title>Searched User</title>
+</head>
+<body>
+
+	
+
+	<form method="POST" enctype="multipart/form-data">
+		<div class ="container" style="overflow-x: auto;">
+
+			<!-- Form Title -->
+			<!-- <h2 class="text-center">Hello</h2> -->
+
+		   <!-- Table for Users -->
+		   <table>
+		   	<thead>
+		    <tr>	
+		   		<th>UserID</th>
+		   		<th>First Name</th>
+		   		<th>Last Name</th>
+		   		<th>Username</th>
+		   		<th>Email</th>
+		   		<th>Gender</th>
+		   		<th>Date of Birth</th>
+		   		<th>Profile Image</th>
+		   		<th>Role</th>
+		   		<th>Entry Date</th>
+		   		<th>Password</th>
+		   		<th>Actions</th>
+		   	</tr>
+		   	</thead>
+
+		   	<tbody>
+		   		<?php //foreach ($data as $i => $user): ?>
+		   			<tr>
+		   				<td> <?php echo $user['ID']?></td>
+		   	           <td><a href="Showallusers.view.php?id=<?php echo $user['ID'] ?>"><?php echo $user['ID']?></a></td>
+		   	           <td><?php echo $user['First_name'] ?></td>
+		   	           <td><?php echo $user['Last_name'] ?></td>
+		   	           <td><?php echo $user['Username'] ?></td>
+		   	           <td><?php echo $user['Email'] ?></td>
+		   	           <td><?php echo $user['Gender'] ?></td>
+		   	           <td><?php echo $user['Dob'] ?></td>
+		   	           <td><img src="uploads/<?php echo $user['Picture'] ?>" alt ="<?php echo $user['Username'] ?>"></td>
+		   	           <td><?php
+		   	                    if ($user['RoleID'] == 0) {echo 'Driver';}
+		   	               else if ($user['RoleID'] == 1) {echo 'Admin';} 
+		   	               else if ($user['RoleID'] == 2) {echo 'Manager';}?></td>
+		   	           <td><?php echo $user['Entry_Date'] ?></td>
+		   	           <td><?php echo $user['Password'] ?></td>
+		   	           <td><a href = "Edituser.view.php?id=<?php echo $user['ID'] ?>">Edit</a> &nbsp 
+							<a href = "../controller/Delete.controller.php?id=<?php echo $user['ID'] ?>" onclick="return confirm('Are you sure you want to delete this entry?')">Delete</a></td>
+		   			</tr>
+		   		<?php //endforeach; ?>
+		   	</tbody>
+
+		   </table>
+
+
+		</div>
+	</form>
+
+    <?php //include 'Footer.view.php'; ?>
+
+</body>
+
+</html>

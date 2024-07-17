@@ -1,0 +1,42 @@
+<?php
+
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+//print_r($_SESSION['userdata']['Username']); //For debugging purpose
+require '../controller/driveraccess.controller.php';
+?>
+<!DOCTYPE html>
+<html>
+
+
+
+<body>
+
+
+
+<br>
+<fieldset>
+    <legend>ACCOUNT</legend>
+
+
+
+<ul>
+      <li><a href="Dashboard.view.php">Dashboard</a></li>
+                    <li><a href="D.Profile.php">View Profile</a></li>
+                    <li><a href="D.Edit_Profile.php">Edit Profile</a></li>
+                    <li><a href="D.Profile_picture.php">Change Profile Picture</a></li>
+                    <li><a href="D.Change_pass.php">Change Password</a></li>
+                   <li><a href="D.transaction_history.php">View Transactions</a></li>
+
+                    <li><a href="Logout.view.php">Logout</a></li>
+
+
+
+</ul>  
+</fieldset>
+
+
+
+</body>
+</html>

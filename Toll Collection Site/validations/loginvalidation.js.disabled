@@ -1,0 +1,62 @@
+//Defining constant reference to form fields
+const form = document.getElementById('form');
+const username = document.getElementById('username');
+const pass = document.getElementById('pass');
+
+//Default form submit prevention
+form.addEventListener('submit', e => {
+	e.preventDefault();
+
+	validateinputs();
+
+});
+
+const setError = (element, message) => {
+	const inputControl = element.parentelement;
+	const errorDisplay = inputControl.querySelector('.error');
+
+	errorDisplay.innerText = message;
+	inputControl.classList.add('error');
+	inputControl.classList.remove('success');
+};
+
+const setSuccess = element => {
+	const inputControl = element.parentelement;
+	const errorDisplay = inputControl.querySelector('.error');
+
+	errorDisplay.innerText = '';
+	inputControl.classList.add('success');
+	inputControl.classList.remove('error');
+};
+
+
+//Whitespace removal from inputs
+const validateinputs = () => {
+	const usernameValue = username.value.trim();
+	const passwordValue = pass.value.trim();
+
+	if(usernameValue === '')
+	{
+		setError(username, 'Username is required');
+	}
+	else
+	{
+		setSuccess(username);
+	}
+
+	if(passwordValue === '')
+	{
+		setError(pass, 'Password is required');
+	}
+	else
+	{
+		if(passwordValue.length < 3)
+		{
+			setError(pass, 'Password must be at least 3 characters or more');
+		}
+		else
+		{
+			setSuccess(pass);
+		}
+	}
+};

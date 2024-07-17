@@ -1,0 +1,62 @@
+<?php $page='Search'; ?>
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Search</title>
+</head>
+<body>
+
+	<?php include 'Header.view.php';
+	      //include '../controller/Search.controller.php'; ?>
+
+
+	<form method="POST" enctype="multipart/form-data">
+		<div class ="container" align="center">
+
+			<!-- Form Title -->
+			<h2 class="text-center">Search User</h2>
+			<br>
+
+			<!-- Form input -->
+			Username: <input type="text" name="username">
+			<p id="nameErr"></p>
+            <br/>
+
+            <button type="Submit" name="search" id="search">Search</button>
+		</div>
+		<div id="txtHint"></div>
+	</form>
+
+    <?php include 'Footer.view.php'; ?>
+
+</body>
+
+	<script>
+		function showUser(user)
+		{
+			if (user == "")
+			{
+				document.getElementbyId("txtHint").innerHTML = "";
+				return;
+			}
+			else
+			{
+				var xmlhttp = new XMLHttpRequest();
+				xmlhttp.onreadystatechange = function()
+				{
+					if(this.readyState == 4 && this.status == 200)
+					{
+                       document.getElementbyId("txtHint").innerHTML = this.responseText;
+					}
+				};
+				xmlhttp.open("GET","../controller/Search.controller.php?q="+user,true);
+				xmlhttp.send();
+			}
+		}
+	</script>
+
+</html>

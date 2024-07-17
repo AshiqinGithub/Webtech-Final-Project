@@ -1,0 +1,34 @@
+<?php
+
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+//print_r($_SESSION['userdata']['Username']); //For debugging purpose
+require '../controller/boothaccess.controller.php';
+?>
+
+
+<!DOCTYPE html>
+<html>
+
+<body>
+
+<br>
+<fieldset>
+    <legend>ACCOUNT</legend>
+
+<ul>
+       <li><a href='Dashboard.view.php'>DASHBOARD</a><br></li>
+       <li style=" font-weight: bold;"><a href='bm.workplace.php'>WORK PLACE</a><br></li>
+       <li><a href='bm.view profile.php'>VIEW PROFILE</a><br></li>
+       <li><a href='bm.edit profile.php'>EDIT PROFILE</a><br></li>
+       <li><a href='bm.edit propic.php'>CHANGE PROFILE PICTURE</a><br></li>
+       <li><a href='bm.change password.php'>CHANGE PASSWORD</a><br></li>
+       <li><a href='bm.SearchDriver.php'>SEARCH A DRIVER</a><br></li>
+       <li><a href='Logout.view.php'>LOGOUT</a><br></li>
+
+</ul>  
+</fieldset>
+
+</body>
+</html>

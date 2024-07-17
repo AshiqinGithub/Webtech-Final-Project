@@ -1,0 +1,136 @@
+<?php 
+$page='Search';
+require_once '../controller/Fetchuserinfo.controller.php';
+
+$users = fetchallUsers();
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="../css/tables.css" rel="stylesheet"/>
+	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+	<title>Active Search</title>
+</head>
+<body>
+		<?php include 'Header.view.php'; ?>
+
+		<div class="container">
+			<div><h2>Test search using AJAX</h2></div>
+			<div>&nbsp;</div>
+			<div class="container">
+				<form method="POST" name="searchform" enctype="multipart/form-data">
+					<input type="text" name="search" id="search" placeholder="Search..." onkeyup="search()">
+				</form>
+			</div>
+			<div>&nbsp;</div>
+			<div id="search_table">
+				<table>
+					<thead>
+						<tr>
+							<th>ID</th>
+		   		            <th>First Name</th>
+		   		            <th>Last Name</th>
+		   		            <th>Username</th>
+		   		            <th>Email</th>
+		   		            <th>Gender</th>
+		   		            <th>Date of Birth</th>
+		   		            <th>Profile Image</th>
+		   		            <th>Role</th>
+		   		            <th>Entry Date</th>
+		   		            <!-- <th>Password</th>
+		   		            <th>Actions</th> -->
+						</tr>
+					</thead>
+					<tbody>
+						<?php foreach ($users as $list) {?>
+						<tr>
+							<td><?php echo $list['ID'] ?></td>
+							<td><?php echo $list['First_name'] ?></td>
+		   	                <td><?php echo $list['Last_name'] ?></td>
+		   	                <td><?php echo $list['Username'] ?></td>
+		   	                <td><?php echo $list['Email'] ?></td>
+		   	                <td><?php echo $list['Gender'] ?></td>
+		   	                <td><?php echo $list['Dob'] ?></td>
+		   	                <td><img src="uploads/<?php echo $list['Picture'] ?>" alt ="<?php echo $list['Username'] ?>"></td>
+		   	                <td><?php
+		   	                         if ($list['RoleID'] == 0) {echo 'Driver';}
+		   	                    else if ($list['RoleID'] == 1) {echo 'Admin';} 
+		   	                    else if ($list['RoleID'] == 2) {echo 'Manager';}?></td>
+		   	                <td><?php echo $list['Entry_Date'] ?></td>
+		   	            <!--     <td><?php //echo $list['Password'] ?></td>
+		   	                <td><a href = "Editlist.view.php?id=<?php //echo $list['ID'] ?>">Edit</a> &nbsp 
+							     <a href = "../controller/Delete.controller.php?id=<?php // echo $list['ID'] ?>" onclick="return confirm('Are you sure you want to delete this entry?')">Delete</a></td> -->
+						</tr>
+						<?php } ?>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div>&nbsp;</div>
+
+<script>
+	function search()
+	{
+		var search = jQuery('#search').val();
+		jQuery.ajax({
+			method: 'post',
+			url: '../controller/Getlivedata.controller.php',
+			data: 'search='+search,
+			success:function(data)
+			{
+				jQuery('#search_table').html(data);
+			}
+		});
+	}
+</script>
+
+
+
+
+        <?php include 'Footer.view.php'; ?>
+
+<!-- </body>
+<script>
+	function search(str)
+	{
+		if(string == "")
+		{
+			document.getElementById("search_table").innerHTML = "";
+			return;
+		}
+		else
+		{
+			var xmlhttp = new XMLHttpRequest();
+			xmlhttp.onreadystatechange = function()
+			{
+				if(this.readyState == 4 && this.status == 200)
+				{
+					document.getElementById("search_table").innerHTML = this.responseText;
+				}
+			};
+			xmlhttp.open("POST","../controller/Getlivedata.controller.php?search"+string,true);
+            xmlhttp.send();
+		}
+		
+	}
+</script> -->
+
+<!-- <script>
+	function search()
+	{
+		var search = jQuery('#search').val();
+		jQuery.ajax({
+			method: 'post',
+			url: '../controller/Getlivedata.controller.php',
+			data: 'search='+search,
+			success:function(data)
+			{
+				jQuery('#search_table').html(data);
+			}
+		});
+	}
+</script> -->
+</html>
