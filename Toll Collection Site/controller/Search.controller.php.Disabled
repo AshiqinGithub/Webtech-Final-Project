@@ -1,0 +1,51 @@
+<?php 
+/////////////////////////////////////
+// require_once ("../model/User.model.php");
+
+// if(isset($_POST['search']))
+// {
+// 	$data['username'] = $_POST['username'];
+
+// 	if(searchentry($data))
+// 	{
+// 		//$row['Username'] = $data['username'];
+// 		header('location:../view/Showsearcheduser.view.php');
+// 	}
+// 	else
+// 	{
+// 		echo '<script>alert("No Match");</script>';
+// 	}
+// 	//$searchedUsers = searchentry($_POST['username']); //this variable stays 0, so no array return
+// 	//require_once '../view/Showsearcheduser.view.php';
+
+// }
+?>
+
+<?php
+
+// $data = "key";
+
+// if(isset($_GET['q']))
+// {
+// 	$data = $_GET['q'];
+// }
+
+// $conn = new mysqli('localhost','root','','webtech');
+
+// if($conn->connect_error)
+// {
+// 	exit('databse not found');
+// }
+
+// $sqlquery = "select * from users where Username like '$data%' limit 5";
+// $stmt = $conn->query($sqlquery); //use "query" instead of "prepare" in case of issue
+
+// if($stmt)
+// {
+// 	$result = $stmt->fetch_assoc();
+// 	echo "<h1".$result['First_name']."</h1>";
+// }
+
+
+
+?>

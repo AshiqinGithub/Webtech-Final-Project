@@ -1,0 +1,110 @@
+<?php require '../model/Dbconnect.model.php';
+
+$conn = dbcon();
+////////////////////Using W3Schools tutotials - Did not work////////////////////
+// $q = $_POST['search'];
+
+// $sqlquery = "SELECT Username FROM users WHERE Username LIKE '%search%'";
+// $stmt = $conn->prepare($sqlquery);
+// $stmt->execute();
+
+// $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+// if(isset($data['0']))
+// {
+// 	echo "<table>
+// 					<thead>
+// 						<tr>
+// 							<th>ID</th>
+// 		   		            <th>First Name</th>
+// 		   		            <th>Last Name</th>
+// 		   		            <th>listname</th>
+// 		   		            <th>Email</th>
+// 		   		            <th>Gender</th>
+// 		   		            <th>Date of Birth</th>
+// 						</tr>
+// 					</thead>
+// 					<tbody>";
+// 						foreach ($data as $list)
+// 					{
+// 						echo"<tr>";
+// 						echo"<td>".$list['ID']."</td>";
+// 						echo"<td>".$list['First_name']."</td>";
+// 						echo"<td>".$list['Last_name']."</td>";
+// 						echo"<td>".$list['Username']."</td>";
+// 						echo"<td>".$list['Email']."</td>";
+// 						echo"<td>".$list['Gender']."</td>";
+// 						echo"<td>".$list['Dob']."</td>";
+// 						echo"<tr>";
+// 					}
+
+// 	echo "</tbody>
+// 	        </table>";
+// 	$conn = null;
+// }
+// else
+// {
+// 	echo "Does not exist";
+// }
+
+
+
+
+//////////////////////OLD Code//////////////////
+$search = $_POST['search'];
+
+$sqlquery = "SELECT Username FROM users WHERE Username LIKE '%search%'";
+$stmt = $conn->prepare($sqlquery);
+$stmt->execute();
+
+$data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+if(isset($data['0']))
+{
+	$html = '<table>
+					<thead>
+						<tr>
+							<th>ID</th>
+		   		            <th>First Name</th>
+		   		            <th>Last Name</th>
+		   		            <th>listname</th>
+		   		            <th>Email</th>
+		   		            <th>Gender</th>
+		   		            <th>Date of Birth</th>
+		   		            <th>Profile Image</th>
+		   		            <th>Role</th>
+		   		            <th>Entry Date</th>
+		   		            <!-- <th>Password</th>
+		   		            <th>Actions</th> -->
+						</tr>
+					</thead>
+					<tbody>';
+
+					foreach ($data as $list)
+					{
+						$html.='<tr>
+							<td>'.$list['ID'].'</td>
+							<td>'.$list['First_name'].'</td>
+		   	                <td>'.$list['Last_name'].'</td>
+		   	                <td>'.$list['Username'].'</td>
+		   	                <td>'.$list['Email'].'</td>
+		   	                <td>'.$list['Gender'].'</td>
+		   	                <td>'.$list['Dob'].'</td>
+		   	                <td><img src="uploads/'.$list['Picture'].'" alt ="'.$list['Username'].'></td>
+		   	                <td>'.
+		   	                         if ($list['RoleID'] == 0) {echo 'Driver';}
+		   	                    else if ($list['RoleID'] == 1) {echo 'Admin';} 
+		   	                    else if ($list['RoleID'] == 2) {echo 'Manager';}.'</td>
+		   	                <td>'.$list['Entry_Date'].'</td>
+						      </tr>';
+					}
+
+	$html.='</tbody>
+	        </table>';
+	echo $html;
+}
+else
+{
+	echo "Does not exist";
+}
+?>
